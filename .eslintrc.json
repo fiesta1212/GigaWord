@@ -1,0 +1,19 @@
+{
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true
+  },
+  "plugins": [
+    "office-addins"
+  ],
+  "extends": [
+    "plugin:office-addins/react"
+  ],
+  "globals": {
+    "process": "readonly",
+    "self": "readonly",
+    "window": "readonly",
+    "Office" : "readonly"
+  }
+}

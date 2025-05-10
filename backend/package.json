@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/msal-node": "^3.5.1",
+    "axios": "^1.9.0",
+    "backend": "file:",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "gigachat-node": "^2.4.5",
+    "node-localstorage": "^3.0.5",
+    "serverless-http": "^3.2.0",
+    "uuid": "^11.1.0"
+  }
+}
