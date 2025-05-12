@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@azure/msal-node": "^3.5.1",
+    "@azure/msal-node": "^3.5.3",
     "axios": "^1.9.0",
     "backend": "file:",
     "cors": "^2.8.5",

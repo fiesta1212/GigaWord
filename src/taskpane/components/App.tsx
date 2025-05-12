@@ -75,7 +75,7 @@ export default function App() {
   };
 
   const onInsert = async () => {
-    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, function (asyncResult) {
+    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, function (asyncResult: { error: any; status: Office.AsyncResultStatus; }) {
       const error = asyncResult.error;
       if (asyncResult.status === Office.AsyncResultStatus.Failed) {
         console.log(error.message);
@@ -83,7 +83,7 @@ export default function App() {
         Office.context.document.setSelectedDataAsync(
           generatedText,
           { coercionType: Office.CoercionType.Text },
-          function (asyncResult) {
+          function (asyncResult: { error: any; status: Office.AsyncResultStatus; }) {
             const error = asyncResult.error;
             if (asyncResult.status === Office.AsyncResultStatus.Failed) {
               console.log(error.message);

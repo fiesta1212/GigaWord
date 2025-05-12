@@ -61,7 +61,7 @@ export default function ChangeStyle() {
 
   const onChangeStyle = async () => {
     setLoading(true);
-    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, function (asyncResult) {
+    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, function (asyncResult: { status: Office.AsyncResultStatus; value: string; error: any; }) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
         const text = asyncResult.value as string;
         mainApi
