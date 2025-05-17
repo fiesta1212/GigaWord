@@ -9,6 +9,7 @@ export default function App() {
   const [apiKey, setApiKey] = useState<string>("");
   const [prompt, setPrompt] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [successMessage, setSuccess] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [generatedText, setGeneratedText] = useState<string>("");
 
@@ -39,25 +40,45 @@ export default function App() {
   const saveApiKey = (key: string) => {
     const existingKey = localStorage.getItem("apiKey");
     console.log(existingKey);
-    setApiKey(key);
     localStorage.setItem("apiKey", key);
+    setApiKey(key);
     if (!existingKey || existingKey !== key) {
       mainApi
         .getToken({ apiKey: key })
         .then(() => {
           setError("");
+          setSuccess("Токен успешно получен!");
         })
         .catch((e) => {
           console.error(e);
           setApiKey("");
           localStorage.removeItem("apiKey");
           setError("Не удалось получить токен из API, попробуйте снова");
+          setSuccess("");
         });
     } else {
       setError("");
-      mainApi.getToken({ apiKey: key });
+      mainApi.getToken({ apiKey: key })
+      .then(() => {
+        setSuccess("Токен успешно получен!");
+      })
+      .catch((e) => {
+        console.error(e);
+        setError("Не удалось получить токен из API, попробуйте снова");
+        setSuccess("");
+      });
     }
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccess("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+    return undefined;
+  }, [successMessage]);
 
   const onClick = async () => {
     setGeneratedText("");
@@ -185,6 +206,11 @@ export default function App() {
         <Login onSave={saveApiKey} />
       )}
       {error && <MessageBar messageBarType={MessageBarType.error}>{error}</MessageBar>}
+      {successMessage && (
+      <MessageBar messageBarType={MessageBarType.success}>
+        {successMessage}
+      </MessageBar>
+    )}
     </Container>
   );
 }
